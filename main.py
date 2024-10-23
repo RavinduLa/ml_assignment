@@ -79,7 +79,7 @@ def train_svm_classifier():
     print("First label after encoding: " + str(labels_training[0]))
 
     # Instantiate the model
-    model = SVC(C=1)
+    model = SVC(C=10)
 
     # Train the model
     print("Training the model...")
