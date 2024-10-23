@@ -75,6 +75,7 @@ def svm_validate_model(trained_model, sentences, labels):
 
 # Validates the pickle file for SVM model
 def svm_validate_saved_model():
+    print("Loading SVM Model and encoder...")
     model = svm_load_model()  # Load the model
 
     # Load the saved encoder
@@ -92,6 +93,8 @@ def svm_validate_saved_model():
     # Encode validation labels
     encoded_validation_labels = label_encoder.fit_transform(val_labels)
 
+    print("Model and encoder loaded.\n")
+
     # Run model validation
     svm_validate_model(model, val_X, encoded_validation_labels)
 
@@ -106,6 +109,9 @@ def svm_validate_saved_model():
     predicted_label = label_encoder.inverse_transform(pred)
 
     print(f"Predicted label for sample sentence, \"{sample_sentence}\" : " + str(predicted_label[0]))
+    print("\n")
+
+
 
 
 def nb_load_saved_model():
@@ -126,7 +132,7 @@ def nb_validate_saved_model():
     print("Loading the saved model and the vectorizer")
     model = nb_load_saved_model()
     vectorizer = nb_load_saved_vectorizer()
-    print("Loaded the saved model and the vectorizer")
+    print("Loaded the saved model and the vectorizer\n")
 
     validation_dictionary = load_validation_dictionary()
 
@@ -139,8 +145,8 @@ def nb_validate_saved_model():
     # print("Validating saved model")
     validate_runtime_model(model, X_val, val_labels)
 
-    sample_sentence = "Order a table for 5 at Sun Food"
+    sample_sentence = "Reserve a table for 5 at Sun Food at tomorrow 7 P.M."
     sample_vec_sentence = vectorizer.transform([sample_sentence])
 
     prediction = model.predict(sample_vec_sentence)
-    print(f"Prediction for sample sentece, \"{sample_sentence}\" is: {prediction[0]}")
+    print(f"Prediction for sample sentence, \"{sample_sentence}\" is: {prediction[0]}")
